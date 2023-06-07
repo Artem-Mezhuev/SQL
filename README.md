@@ -145,8 +145,7 @@ WHERE end_date > (SELECT end_date
 FROM library
 WHERE char id = 2)
 
-Use the sub-query to print
-the names of all patronuses whose owners are older than the character with the patronus Unknown
+Use the sub-query to print the names of all patronuses whose owners are older than the character with the patronus Unknown
 SELECT patronus
 FROM characters
 WHERE age > (SELECT age
