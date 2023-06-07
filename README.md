@@ -1,1 +1,157 @@
 # SQL
+#Job text:
+Task to create your own database with collections, as well as run multiple queries to them.
+
+Print the name, surname, patronus of all the characters who have patronus and he is known
+SELECT fame, Iname, patronus
+FROM characters
+WHERE NOT patronus = 'Unknown' AND patronus IS NOT
+NULL;
+
+
+Print the name of the characters with the last letter in the last name 'e'
+SELECT Iname
+FROM characters
+WHERE Iname LIKE *%e';
+
+
+Calculate the total age of all characters and put it on the screen
+SELECT SUM(age)
+FROM characters;
+
+
+Print the name, surname and age of the characters by their decreasing age
+SELECT fname, Iname, age
+FROM characters
+ORDER BY age DESC;
+
+Print the name of the character and the age at which the latter is in the range of 50 to 100 years
+SELECT fname, age
+FROM characters
+WHERE age BETWEEN 50 and 100;
+
+Print the age of all characters so that none of them are the same
+SELECT DISTINCT age
+FROM characters;
+
+Print all information about characters who have a faculty = Gryffindor and are over 30 years old
+SELECT *
+FROM characters
+WHERE age > 30 AND faculty = "Gryffindor";
+
+Print the names of the first three faculties out of the table so that the faculties do not repeat
+SELECT DISTINCT faculty
+FROM characters
+LIMIT 3;
+
+Print the names of all characters whose name starts with "N' and consists of 5 letters, or whose name begins with "L'
+SELECT fname
+FROM characters
+WHERE fname LIKE H
+'OR fname LIKE "L%' ;
+
+Count the average age of all characters
+SELECT AVG (age)
+FROM characters;
+
+Print the last name of all the characters that contain the letter 'a':
+SELECT lname
+FROM characters
+WHERE Iname LIKE "%a%";
+
+Use alias to temporarily replace column name with Half-Blood Prince for
+real half-breed prince:
+SELECT fame as Half Blood Prince
+FROM characters
+WHERE fname = 'Severus';
+
+Print id and names of all cartridges in alphabetical order, provided they are or known
+SELECT char_id, patronus
+FROM characters
+WHERE NOT patronus = Unknown' AND patronus IS NOT NULL
+ORDER BY patronus ASC;
+
+Using the IN operator, print the name of those characters who have the last name Crabbe, Granger or
+Diggory
+SELECT fame, Iname
+FROM characters
+WHERE Iname IN ("Crabbe", "Granger", "Diggory");
+
+Using the HAVING operator, count the number of characters in each faculty, leaving only those faculties where the number of students is greater than 1
+SELECT COUNT (char_id), faculty
+FROM characters
+GROUP BY faculty
+HAVING COUNT (char id) > 1;
+
+Use the CASE statement to describe the following logic:
+Print the character’s name and surname and the following text message:
+If Gryffindor faculty, Godric should appear in the console
+If the faculty of Slytherin, then the console should post Salazar
+If the faculty of Ravenclaw, THEN IN THE CoNsLi to THE WORLD Rowena
+If the faculty of Hufflepuff, then the console should display Helga
+If other information is displayed Muggle Use the Founders alias for message
+SELECT fame, Iname,
+CASE
+WHEN faculty = 'Gryffindor' THEN 'Godric'
+WHEN faculty =
+'Slytherin' THEN 'Salazar'
+WHEN faculty = 'Ravenclaw' THEN 'Rowena'
+WHEN faculty = 'Hufflepuff' THEN 'Helga'
+ELSE 'Muggle'
+END AS Founders
+FROM characters;
+
+Use the regular expression to find names of characters that do not start with the letters N, L or s and print them
+SELECT Iname
+FROM characters
+WHERE NOT Iname REGEXP "^[HLS]';
+
+Print the name, last name of the characters and the title of the book that is listed on them
+SELECT fame, Iname, book_name
+FROM characters
+INNER JOIN library
+ON characters.char_id = library.char_id;
+
+Print the name, last name of the characters and title of the book, whether or not they have books
+SELECT fname, Iname, book_name
+FROM characters
+LEFT JOIN library
+ON characters. char id = library.char id;
+
+Print the title of the book and the name of the patronus, whether or not there is information on the holder of the book in the chart.
+SELECT book_name, patronus
+FROM characters
+RIGHT JOIN library
+ON characters.char id = library.char id;
+
+Print the name, surname, age of the characters and the title of the book they have on, provided that all book owners must be over 15 years old
+SELECT fame, Iname, age, book_name
+FROM characters
+INNER JOIN library
+ON characters.char id = library.char id
+WHERE age > 15;
+
+Print the character’s name, title, date of issue, and completion date, provided that he is under 15 and his patronus is unknown
+SELECT fname, book_name, start_date, end_date
+FROM characters
+INNER JOIN library
+ON characters.char id = library.char id
+WHERE age < 15 AND patronus = "Unknown";
+
+Using a nested query the number of books that have end_date greater than end_date y Hermione
+SELECT count (book id)
+FROM library
+WHERE end_date > (SELECT end_date
+FROM library
+WHERE char id = 2)
+
+Use the sub-query to print
+the names of all patronuses whose owners are older than the character with the patronus Unknown
+SELECT patronus
+FROM characters
+WHERE age > (SELECT age
+FROM characters
+WHERE patronus = 'Unknown);
+
+
+
